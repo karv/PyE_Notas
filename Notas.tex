@@ -1,0 +1,101 @@
+\documentclass[spanish]{report}
+
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amsbsy}
+\usepackage{mathrsfs}
+\usepackage{graphpap}
+\usepackage{amstext}
+\usepackage{graphicx}
+
+\usepackage[spanish]{babel}
+
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+
+
+\newtheorem{thm}{Theorem}
+\newtheorem{defi}[thm]{Definición}
+\newtheorem{nota}[thm]{Nota}
+\newtheorem{ejm}[thm]{Ejemplo}
+\newtheorem{ejer}[thm]{Ejercicio}
+
+\newcommand{\card}[1]{\left|#1 \right|}
+
+\begin{document}
+	
+\section{Probabilidad}
+
+
+\subsection{Principios de conteo}
+
+Dada la definición clásica de probabilidad $p(A) = \frac{\card{A}}{\card{S}}$ es clara la necesidad de tener herramientas para un conteo de elementos de los conjuntos $e$ y $S$ de una manera más óptima que simplemente hacerlo de uno en uno (y a veces no hay de otra, por ejemplo el número de ordenaciones (lineales) posibles para un conjunto de únicamente 10 elementos ya supera los tres millones.)
+
+\subsubsection{Principio de la suma}
+\begin{defi}
+	Dado un espacio muestral $S$, dos eventos $A, B \subseteq S$ son \emph{excluyentes} cuando $A \cap B = \emptyset$. 
+	Una familia de eventos $\mathcal{A}= \left\lbrace A_i \right\rbrace_{i<n}$ es una \emph{familia excluyente} si cualesquiera dos elementos distintos de la colección son excluyentes. i.e. $\forall A_i, A_j \in \mathcal{A}$, se cumple que $A_i \cap A_j \neq \emptyset \implies A_i = A_j$.
+\end{defi}
+
+La definición anterior se traduce a que ningún punto muestral puede pertenecer al mismo tiempo a dos eventos excluyentes; o en otras palabras, que es inconsistente que dos eventos excluyentes \emph{ocurran} a la vez.
+
+Usaremos estas nociones para inducir nuestro primer principio de conteo: \textbf{La regla de la suma}, entendiéndose así:
+si tenemos un conjunto (finito) de eventos excluyentes $A_i$ para $i<n$, y además conocemos cuántos puntos tiene cada $A_i$, digamos $A_i = k_i$. Entonces si nos interesa conocer cuántos elementos tiene el conjuntos de puntos muestrales $A = A_0 \cup A_1 \cup \cdots \cup A_{n-1}$ que consiste en aquellos que son \emph{instancias} %% ¿Otra mejor palabra?
+de algún $A_i$, entonces $A$ contiene exactamente $k_0 + k_1 + \ldots + k_{n-1}$ puntos muestrales.
+Esto se puede resumir en la ecuación:
+\begin{equation}\label{eq_PrincipioSuma}
+	\card{\cup_{i<n} A_i} = \sum_{i<n} k_i
+\end{equation}
+
+\begin{ejm}
+	Se tiene una población de personas $S$ y se sabe que 15 de ellos tienen doce años o menos, 18 tiene trece, catorce o quince años, 12 tienen dieciséis o diecisiete años. ¿Cuántos menores de edad hay?
+\end{ejm}
+\begin{proof}[Solución]
+	Sea $A_0$ el evento de las personas que tienen doce años o menos, $A_1$ los que tienen trece, catorce o quince, $A_2$ los que tienen dieciséis o diecisiete.
+	Luego $A = A_0 \cup A_1 \cup A_2$ es el conjunto que buscamos. Usando el principio \ref{eq_PrincipioSuma} tenemos que \[\card{A} = \card{A_0}+\card{A_1}+\card{A_2} = 15+18+12= 45\]
+\end{proof}
+
+\subsubsection{Principio del complemento} %TODO: ¿Pensar en otro nombre?
+
+Supongamos que tenemos un evento $A$ en un espacio $S$, nos interesa saber cuántas veces no \emph{ocurre} $A$. La siguiente ecuación nos da la respuesta:
+\begin{equation}\label{eq_PrincipioComplemento}
+	\card{A^\prime} = \card{S} - \card{A}
+\end{equation}
+
+\begin{ejm}
+	De una lista de 1000 nombres de personas, se agrupan según la primer vocal que aparece. Hay 435 personas que empiezan con \emph{a} %TODO: pensar bien qué ejemplo quiero poner. Debe poder hacerce por el principio de suma(método largo) y por el de complemento.
+\end{ejm}
+\begin{proof}[Solución]
+	Se le deja al lector.
+\end{proof}
+
+\subsubsection{Principio de multiplicación}
+Consideremos una colección de $n$ cajas, en la $i$-ésima caja, hay $k_i$ canicas; y nos preguntamos: ¿de cuántas formas puedo tomar una canica de cada caja?
+El \textbf{principio multiplicativo} soluciona este tipo de problemas diciéndonos que tiene exactamente $\prod_{i<n}k_i$ formas de hacerlo.
+
+Menos informalmente, supongamos que tenemos una colección de espacios muestrales $\left\lbrace S_i \right\rbrace_{i<n}$ y se elige un evento $A_i \subseteq S_i$ de cada uno de ellos. 
+Si $S$ es el espacio muestral que consiste en \emph{ejecutar} %TODO No me gusta (instanciar? interpretar?)
+cada uno, y en orden, los \emph{experimentos} de cada espacio $S_i$; y $A \subseteq S$ denota los puntos de $S$ de tal forma que: en la primer etapa del experimento de $S$ (o sea en la etapa de $S_0$) ocurre $A_0$; en la segunda etapa ocurre $A_1$, \ldots, en la $i$-esima etapa ocurre $A_i$. Entonces este evento $A$ ocurre exactamente $k_0 \cdotp k_1 \cdots k_{n-1}$, donde $k_i= \card{A_i}$.
+Este principio se puede abreviar así:
+\begin{equation}\label{eq_PrincipioMultiplicativo}
+	\card{S} = \card{\prod_{i<n} S_i} = \prod_{i<n}k_i = k_0 \cdotp k_1 \cdots k_{n-1}
+\end{equation}
+
+\begin{ejm}
+	Usando este principio podemos calcular, a manera de comprobación, cuántos números enteros no negativos existen menores que 10000.
+\end{ejm}
+\begin{proof}[Solución]
+Definamos para cada $i=0,1,2,3$ nuestros espacios muestrales $S_i = A_i= \left\lbrace 0,1, \ldots,9 \right\rbrace$ que serán nuestras \emph{Etapas} o en nuestro contexto, dígitos del número que estamos contando. %TODO se escucha raro así, pero en término de algoritmia creo que está bien. No sé.
+
+Consideramos a $S$ como en la definición del principio multiplicativo; así por ejemplo, si en la primer etapa \emph{contamos} el número $7 \in S_0$, en la segunda el $4 \in S_1$, en la tercera $2 \in S_2$ y en la cuarta $8 \in S_3$. El número que estamos contando en este caso es el 7428.
+
+Luego, la ecuación nos dice que $S$ tiene $10 \cdotp 10\cdotp 10 \cdotp 10 = 10^4 = 10000$ elementos; que es lo que esperábamos.
+\end{proof}
+
+\begin{ejer}
+	Encuentre cuántos elementos menores que 10000 no tienen el mismo dígito consecutivo, por ejemplo, los números 4518 y 146 sí cuentan, pero 1152, 53, 1003 tienen un dígito consecutivo y por lo tanto no deben contarse.
+\end{ejer}
+
+\end{document}
