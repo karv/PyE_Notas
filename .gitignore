@@ -1,0 +1,9 @@
+# Archivos intermedios de latex
+*.aux
+*.log
+
+# Archivos temporales de algunos editores
+*.synctex.gz
+
+# Compilados de latex
+*.pdf

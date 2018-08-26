@@ -23,6 +23,8 @@
 \newtheorem{ejer}[thm]{Ejercicio}
 
 \newcommand{\card}[1]{\left|#1 \right|}
+\newcommand{\comb}[2]{ {}_{#1}C_{#2}}
+\newcommand{\perm}[2]{ {}_{#1}P_{#2}}
 
 \begin{document}
 	
@@ -31,7 +33,7 @@
 
 \subsection{Principios de conteo}
 
-Dada la definición clásica de probabilidad $p(A) = \frac{\card{A}}{\card{S}}$ es clara la necesidad de tener herramientas para un conteo de elementos de los conjuntos $e$ y $S$ de una manera más óptima que simplemente hacerlo de uno en uno (y a veces no hay de otra, por ejemplo el número de ordenaciones (lineales) posibles para un conjunto de únicamente 10 elementos ya supera los tres millones.)
+Dada la definición clásica de probabilidad $p(A) = \frac{\card{A}}{\card{S}}$ es clara la necesidad de tener herramientas para un conteo de elementos de los conjuntos $A$ y $S$ de una manera más óptima que simplemente hacerlo de uno en uno (y a veces no hay de otra, por ejemplo el número de ordenaciones (lineales) posibles para un conjunto de únicamente 10 elementos ya supera los tres millones.)
 
 \subsubsection{Principio de la suma}
 \begin{defi}
@@ -46,7 +48,7 @@ si tenemos un conjunto (finito) de eventos excluyentes $A_i$ para $i<n$, y adem�
 de algún $A_i$, entonces $A$ contiene exactamente $k_0 + k_1 + \ldots + k_{n-1}$ puntos muestrales.
 Esto se puede resumir en la ecuación:
 \begin{equation}\label{eq_PrincipioSuma}
-	\card{\cup_{i<n} A_i} = \sum_{i<n} k_i
+	\card{\cup_{i<n} A_i} = \sum_{i<n} k_i = k_0 + k_1 + \cdots + k_{n-1}
 \end{equation}
 
 \begin{ejm}
@@ -58,6 +60,7 @@ Esto se puede resumir en la ecuación:
 \end{proof}
 
 \subsubsection{Principio del complemento} %TODO: ¿Pensar en otro nombre?
+% Aunque bien este no es un principio, sino una consecuencia del anterior... ¿Dejarlo de ejercicio?
 
 Supongamos que tenemos un evento $A$ en un espacio $S$, nos interesa saber cuántas veces no \emph{ocurre} $A$. La siguiente ecuación nos da la respuesta:
 \begin{equation}\label{eq_PrincipioComplemento}
@@ -87,15 +90,53 @@ Este principio se puede abreviar así:
 	Usando este principio podemos calcular, a manera de comprobación, cuántos números enteros no negativos existen menores que 10000.
 \end{ejm}
 \begin{proof}[Solución]
-Definamos para cada $i=0,1,2,3$ nuestros espacios muestrales $S_i = A_i= \left\lbrace 0,1, \ldots,9 \right\rbrace$ que serán nuestras \emph{Etapas} o en nuestro contexto, dígitos del número que estamos contando. %TODO se escucha raro así, pero en término de algoritmia creo que está bien. No sé.
+Definamos para cada $i=0,1,2,3$ nuestros espacios muestrales $S_i = A_i= \left\lbrace 0,1, \ldots,9 \right\rbrace$ que serán nuestras \emph{etapas} o en nuestro contexto, dígitos del número que estamos contando. %TODO se escucha raro así, pero en término de algoritmia creo que está bien. No sé.
 
 Consideramos a $S$ como en la definición del principio multiplicativo; así por ejemplo, si en la primer etapa \emph{contamos} el número $7 \in S_0$, en la segunda el $4 \in S_1$, en la tercera $2 \in S_2$ y en la cuarta $8 \in S_3$. El número que estamos contando en este caso es el 7428.
 
 Luego, la ecuación nos dice que $S$ tiene $10 \cdotp 10\cdotp 10 \cdotp 10 = 10^4 = 10000$ elementos; que es lo que esperábamos.
 \end{proof}
+\begin{ejm}
+	Encuentre cuántos números menores que 10000 no tienen dígitos consecutivos iguales, por ejemplo, los números 4518 y 146 sí cuentan, pero 1152, 53, 1003 tienen un dígito consecutivo y por lo tanto no deben contarse.
+\end{ejm}
+\begin{proof}[Solución]
+	Con la misma idea del ejemplo anterior, el primer dígito puede tener cualquier valor del 0 al 10, así que $k_0 = 10$. El segundo dígito es un poco diferente: supongamos que hubiéramos elegido el numero 7 como primer dígito, así que, si eligiéramos un segundo dígito con un 7 violaríamos la regla del problema, así que no podemos incluir este 7 en $A_1$. Fuera de esto, cualquier otro dígito no contradice la regla, así que $k_1 = 10 - 1 = 9$. 
+Exactamente el mismo argumento nos dice que $k_2 = k_3 = 9$.
+Por lo que el principio de multiplicación nos dice que hay exactamente $10 \cdotp 9 \cdotp 9 \cdotp 9 = 7290$.
+\end{proof}
 
-\begin{ejer}
-	Encuentre cuántos elementos menores que 10000 no tienen el mismo dígito consecutivo, por ejemplo, los números 4518 y 146 sí cuentan, pero 1152, 53, 1003 tienen un dígito consecutivo y por lo tanto no deben contarse.
-\end{ejer}
+\subsubsection{Permutaciones}
+Considere que se tiene una colección de dos canicas de colores distintos, azul y rojo, y se colocan en una línea.
+Aplicando el principio de multiplicación, como cualquiera de las dos canicas puede ser tomada primero, $A_0 = \left\lbrace \text{azul}, \text{roja} \right\rbrace$, entonces para la segunda canica sólo existe una sola que puede ser tomada, a saber, la que no se elije para ser la primer canica, $\card{A_1} = k_1 = 1$. Así que hay exactamente $2 \cdotp 1 = 2$ distintas configuraciones para tal línea de canicas.
+
+Siguiendo el mismo razonamiento, en número de distintas ordenaciones para tres canicas de distinto color es $3 \cdotp 2 \cdotp 1= 6$.
+Generalizando la idea, si se tienen $n$ canicas 
+% TODO (No me gusta como está quedando esto)
+
+\subsubsection{Problemas}
+
+\begin{enumerate}
+\item Expanda y calcule las siguientes expresiones:
+	\begin{multicols}{4}\begin{enumerate} 
+	\item $3!$ \item $5!$ \item $1!$ \item $\comb{3}{3}$ \item $\comb{3}{2}$ \item $\comb{5}{4}$ \item $\comb{4}{2}$ \item $\perm{3}{3}$ \item $\perm{3}{2}$ \item $\perm{5}{4}$ \item $\perm{4}{2}$
+	\end{enumerate}\end{multicols}
+
+\item ¿Es cierto que $(2+3)! = 2! + 3!$?
+\item ¿Es cierto que $(2 \cdotp 3)! = 2! \cdotp 3!$?
+
+\item Explique por qué el término $\comb{3}{5}$ no tiene sentido.
+
+%TODO: Más ejercicios de suma.
+
+\item Durante un congreso de un día entero fuera de la ciudad, un estudiante tiene que comer en un restaurante. El menú de desayuno consiste de dos distintas opciones, la de comida es de cinco opciones y de cena de cuatro. ¿De cuántas formas puede elegir el menú completo para todo el día?
+
+\item ¿De cuántas formas distintas pueden caer tres dados de seis caras lanzados en sucesión?
+
+\item En una compañía en la que trabajan 14 programadores, 8 analistas, 4 diseñadores, se requiere formar un equipo de 5 programadores, 3 analistas y 1 diseñador para un proyecto. ¿De cuántas formas distintas se puede formar dicho equipo? %TODO: ¿Los números son muy altos?
+
+\item ¿De cuántas formas distintas se puede tener un par y una terna si se eligen 5 cartas de una baraja?
+
+\item Deduzca el principio del complemento a partir del principio de la suma.
+\end{enumerate}
 
 \end{document}
