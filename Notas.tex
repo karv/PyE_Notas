@@ -26,12 +26,14 @@
 \newcommand{\comb}[2]{ {}_{#1}C_{#2}}
 \newcommand{\perm}[2]{ {}_{#1}P_{#2}}
 
+\title {Notas para el curso de probabilidad y estadística}
 \begin{document}
-	
-\section{Probabilidad}
+%\maketitle
+
+\section*{Probabilidad}
 
 
-\subsection{Principios de conteo}
+\subsection*{Combinatoria}
 
 Dada la definición clásica de probabilidad $p(A) = \frac{\card{A}}{\card{S}}$ es clara la necesidad de tener herramientas para un conteo de elementos de los conjuntos $A$ y $S$ de una manera más óptima que simplemente hacerlo de uno en uno (y a veces no hay de otra, por ejemplo el número de ordenaciones (lineales) posibles para un conjunto de únicamente 10 elementos ya supera los tres millones.)
 
@@ -68,10 +70,10 @@ Supongamos que tenemos un evento $A$ en un espacio $S$, nos interesa saber cuán
 \end{equation}
 
 \begin{ejm}
-	De una lista de 1000 nombres de personas, se agrupan según la primer vocal que aparece. Hay 435 personas que empiezan con \emph{a} %TODO: pensar bien qué ejemplo quiero poner. Debe poder hacerce por el principio de suma(método largo) y por el de complemento.
+	De una lista de 1000 nombres de personas, se agrupan según la primer vocal que aparece. Hay 435 personas que empiezan con \emph{a} %TODO: pensar bien qué ejemplo quiero poner. Debe poder hacerse por el principio de suma(método largo) y por el de complemento.
 \end{ejm}
 \begin{proof}[Solución]
-	Se le deja al lector.
+	Se le deja al lector. % TODO
 \end{proof}
 
 \subsubsection{Principio de multiplicación}
@@ -86,7 +88,7 @@ Este principio se puede abreviar así:
 	\card{S} = \card{\prod_{i<n} S_i} = \prod_{i<n}k_i = k_0 \cdotp k_1 \cdots k_{n-1}
 \end{equation}
 
-\begin{ejm}
+\begin{ejm}\label{ejm_numerosMenorQue}
 	Usando este principio podemos calcular, a manera de comprobación, cuántos números enteros no negativos existen menores que 10000.
 \end{ejm}
 \begin{proof}[Solución]
@@ -112,7 +114,38 @@ Aplicando el principio de multiplicación, como cualquiera de las dos canicas pu
 Siguiendo el mismo razonamiento, en número de distintas ordenaciones para tres canicas de distinto color es $3 \cdotp 2 \cdotp 1= 6$.
 Generalizando la idea, si se tienen $n$ canicas 
 % TODO (No me gusta como está quedando esto)
+% ¿Qué tal si en lugar...?:
 
+\begin{ejm}
+Como en el ejemplo \ref{ejm_numerosMenorQue}, nos preguntamos por la cantidad de números que existen, menores que $10^4$ que no tienen dígitos repetidos (sean o no consecutivos), podemos usar el principio de multiplicación para llegar a la conclusión	de que son $10 \cdotp 9 \cdotp 8 \cdotp 7$. Para convencernos de esto, simplemente notamos que en la primer entrada, podemos poner cualquier dígito, por lo que $\card{S_0} = 10$; en la segunda entrada podemos poner cualquier número excepto el que elegimos en la primer etapa, por lo que $\card{S_1} = 10 - 1 = 9$; de manera análoga, $\card{S_2} = 8$ y $\card{S_3} = 7$.
+El principio multiplicativo nos dice entonces que hay exactamente $10 \cdotp 9 \cdotp 8 \cdotp 7$ de tales números.
+\end{ejm}
+
+Este patrón de razonamiento se repite mucho cuando se intenta seleccionar un subconjunto de objetos de un conjunto dado, y además nos interesa el orden (o sea, es importante saber cuál se selecciona primero, cuál segundo, etc. En el ejemplo fue importante ya que un 9 en la posición de las unidades no es lo mismo que un 9 en la posición de las centenas.)
+
+Cuando el conjunto de $\emph{origen}$ tiene $n$ elementos, y se desea elegir un subconjunto de $m$ elementos (con $m \leq n$, de lo contrario es imposible hacerlo.)
+Al número de formas de hacerlo se le denota $\perm{n}{m}$ (permutaciones de $n$ en $m$) y se puede calcular así:
+\begin{equation} \label{eq_defPermutacion}
+\perm{n}{m} = (n) (n-1) (n-2) \cdots (n-(n-m+1))
+\end{equation}
+
+En nuestro ejemplo, $n=10$ y $m=4$, por lo que la respuesta fue $\perm{10}{4} = 10 \cdotp 9 \cdotp 8 \cdotp 7$.
+
+Para simplificar la notación de $\perm{n}{m}$, definimos la expresión $n!$ ($n$ factorial) definida por \[ n! = 1 \cdotp 2 \cdotp 3 \cdots n-1 \cdotp n\]
+en otras palabras, consiste en multiplicar los primeros $n$ números naturales.
+Podemos reescribir la ecuación \ref{eq_defPermutacion} para que nos quede
+\begin{align*}
+\perm{n}{m} &= (n) (n-1) (n-2) \cdots (n-(n-m+1)) \\
+	&= (n) (n-1) (n-2) \cdots (n-(n-m+1)) \frac{(n-m)!}{(n-m)!}\\
+	&= \frac{(n) (n-1) (n-2) \cdots (n-(n-m+1)) (n-m)!}{(n-m)!}\\
+	&= \frac{n!}{(n-m)!}
+\end{align*}
+
+¿Y ahora que tal si no nos importa en qué orden seleccionamos un subconjunto? por ejemplo, para seleccionar un subgrupo de personas de uno dado; % TODO: ¿poner algún otro ejemplo genérico?
+A este número lo llamamos $\comb{n}{m}$ (combinaciones de $n$ en $m$) donde $n$ es el tamaño del conjunto inicial, y $m$ es el tamaño de los subconjuntos que se quieren contar.
+Se puede calcular con la siguiente fórmula: \[\comb{n}{m} = \frac{\perm{n}{m}}{m!} = \frac{n!}{m!(n-m)!} \]
+
+%TODO: Algún ejemplo aquí.
 \subsubsection{Problemas}
 
 \begin{enumerate}
@@ -126,7 +159,7 @@ Generalizando la idea, si se tienen $n$ canicas
 
 \item Explique por qué el término $\comb{3}{5}$ no tiene sentido.
 
-%TODO: Más ejercicios de suma.
+%TODO: Más (variedad de) ejercicios de suma.
 
 \item Durante un congreso de un día entero fuera de la ciudad, un estudiante tiene que comer en un restaurante. El menú de desayuno consiste de dos distintas opciones, la de comida es de cinco opciones y de cena de cuatro. ¿De cuántas formas puede elegir el menú completo para todo el día?
 
@@ -139,6 +172,33 @@ Generalizando la idea, si se tienen $n$ canicas
 \item En un sorteo en el que están inscritos 30 personas se elijen 3 personas como ganadoras. ¿De cuántas formas puede una persona dada ganar este sorteo?
 
 \item Deduzca el principio del complemento a partir del principio de la suma.
-\end{enumerate}
 
+\item En el lenguaje de computadoras, la información está descrita con 1's y 0's. Un byte es una secuencia de este tipo de longitud 8.
+¿Cuántos diferentes bytes existen?
+
+\item ¿Cuántos números capicúa de 6 dígitos existen?
+
+\item Se quieren repartir cuatro dulces diferentes entre dos niños. ¿De cuántas formas se puede hacer si a cada niño de tener dos dulces? Liste todas las combinaciones posibles.
+
+\item ¿De cuántas formas se pueden sentar 10 personas en 15 asientos?
+
+\item En un torneo de fútbol en el que participan 20 equipos, cada equipo juega exactamente una vez contra cada uno del resto de los equipos. ¿De cuántos partidos consta en torneo?
+
+\item ¿De cuántas formas se puede ordenar un mazo de 52 cartas de póquer?
+
+\item Se realizó un concurso de música en el que participaron 28 competidores. ¿De cuántas formas distintas se puede seleccionar un primer, un segundo y un tercer lugar?
+
+\item Se reparten las 28 fichas de un dominó entre cuatro jugadores. ¿De cuántas formas se puede hacer esta repartición?
+
+\item En una retícula rectangular de 5 por 4, ¿De cuántas formas se puede llegar desde la esquina superior izquierda a la inferior derecha, si los únicos movimientos permitidos son moverse a la derecha y hacia abajo?
+
+\item ¿Cuántas diagonales tiene un polígono de $n$ lados?
+
+\item Considerando que el año tiene 365 días, ¿cuál es la probabilidad de que dos personas tengan la misma fecha de cumpleaños?
+
+\item ¿Cuál es la probabilidad de que tres personas tengan fechas de cumpleaños todas distintas entre sí?
+
+\item Para formar un equipo de baloncesto se necesitan escoger a 5 jugadores de 10 disponibles, y de los elegidos escoger al capitán. ¿De cuántas formas se puede hacer esto?
+
+\end{enumerate}
 \end{document}
