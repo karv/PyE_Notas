@@ -201,4 +201,30 @@ Se puede calcular con la siguiente fórmula: \[\comb{n}{m} = \frac{\perm{n}{m}}{
 \item Para formar un equipo de baloncesto se necesitan escoger a 5 jugadores de 10 disponibles, y de los elegidos escoger al capitán. ¿De cuántas formas se puede hacer esto?
 
 \end{enumerate}
+
+\subsection*{Probabilidad frecuencial}
+
+% Este ejemplo no es formalmente correcto:
+Pensemos en el experimento en el que consiste en sacar un número natural de una bolsa que contiene a todos estos números. ¿Cuál es la probabilidad de que el número que sacamos es un número par?
+
+Es bastante natural intuir que esta probabilidad es $\frac{1}{2}$, ya que hay un número par cada dos números enteros positivos. Pero hágamoslo formalmente:
+
+Si $S$ es nuestro espacio muestral, $S= \left\lbrace 0, 1, 2, \cdots, n, \cdots \right\rbrace$ y $e$ es el evento de \emph{sacar un número par}, así $e= \left\lbrace 0, 2, 4, \cdots 2n \cdots \right\rbrace$. Luego \[p(e) = \frac{\card{e}}{\card{S}} = \frac{\infty}{\infty} \].
+¿Pero cuánto es $\frac{\infty}{\infty}$? ¿1? ¿0? ¿$\infty$?
+En realidad este cociente no está definido, entonces ¿por qué no está definida esta probabilidad? El problema aquí es nuestra definición de probabilidad, %TODO: ref
+ya que falla en el caso infinito. Necesitamos una mejor definición, una que incluya eventos infinitos.
+
+% TODO: ¿Hacerlo en ambiente definición?
+% TODO: Pensar si debo de suponerlo aquí que $e$ es el evento o usar un conjunto $A$ que "prediga" al evento.
+Si $e$ es un conjunto (evento) de números naturales, Sea $e|_n = \left\lbrace i < n : i \in e \right\rbrace$, y $f_n = \frac{e|_n}{n}$. Se cumple que $0 \leq f_n \leq 1$ ya que siempre se cumple que $\card{e|_n} \leq n$.
+Intuitivamente, $\card{e|_n}$ es las veces que ocurre el evento $e$ si el experimento se repite $n$ veces. Así $f_n$ es una aproximación de la \emph{probabilidad real} del evento.
+Luego se define la probabilidad de $e$ como \[p(e) = \lim\limits_{n \to \infty} f_n\] cuando existe.
+
+% TODO: ¿bajarle un poco?
+Esta noción sí nos permite calcular de que un número natural sea par:
+primero notamos que hay exactamente $n$ números pares menores que $2n$. Así que $f_{2n}= \frac{\card{A|_{2n}}}{2n}=\frac{n}{2n}=\frac{1}{2}$.
+% Este límite no está bien justificado, pero supongo que está bien
+Y luego $p(e) = \lim\limits_{n \to \infty} f_n = \lim\limits_{n \to \infty} f_{2n}= \lim\limits_{n \to \infty}\frac{1}{2} = \frac{1}{2}$.
+
+
 \end{document}
