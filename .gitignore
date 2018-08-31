@@ -2,6 +2,12 @@
 *.aux
 *.log
 
+# Índices
+*.idx
+*.ilg
+*.ind
+*.toc
+
 # Archivos temporales de algunos editores
 *.synctex.gz
 

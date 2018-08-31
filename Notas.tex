@@ -9,6 +9,7 @@
 \usepackage{graphpap}
 \usepackage{amstext}
 \usepackage{graphicx}
+\usepackage{imakeidx}
 
 \usepackage[spanish]{babel}
 
@@ -26,14 +27,21 @@
 \newcommand{\comb}[2]{ {}_{#1}C_{#2}}
 \newcommand{\perm}[2]{ {}_{#1}P_{#2}}
 
+
 \title {Notas para el curso de probabilidad y estadística}
+\setcounter{tocdepth}{2}
+%\makeindex
 \begin{document}
 %\maketitle
+%\makeglossary
+\tableofcontents
+\newpage
+\chapter{Probabilidad}
+% TODO: Introducción
+\section{Espacios muestrales}
+% TODO
 
-\section*{Probabilidad}
-
-
-\subsection*{Combinatoria}
+\section{Combinatoria}
 
 Dada la definición clásica de probabilidad $p(A) = \frac{\card{A}}{\card{S}}$ es clara la necesidad de tener herramientas para un conteo de elementos de los conjuntos $A$ y $S$ de una manera más óptima que simplemente hacerlo de uno en uno (y a veces no hay de otra, por ejemplo el número de ordenaciones (lineales) posibles para un conjunto de únicamente 10 elementos ya supera los tres millones.)
 
@@ -202,7 +210,7 @@ Se puede calcular con la siguiente fórmula: \[\comb{n}{m} = \frac{\perm{n}{m}}{
 
 \end{enumerate}
 
-\subsection*{Probabilidad frecuencial}
+\section{Probabilidad frecuencial}
 
 % Este ejemplo no es formalmente correcto:
 Pensemos en el experimento en el que consiste en sacar un número natural de una bolsa que contiene a todos estos números. ¿Cuál es la probabilidad de que el número que sacamos es un número par?
