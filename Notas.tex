@@ -10,7 +10,7 @@
 \usepackage{amstext}
 \usepackage{graphicx}
 \usepackage{imakeidx}
-
+\usepackage{multicol}
 \usepackage[spanish]{babel}
 
 \usepackage[utf8]{inputenc}
@@ -81,19 +81,21 @@ Supongamos que tenemos un evento $A$ en un espacio $S$, nos interesa saber cuán
 	De una lista de 1000 nombres de personas, se agrupan según la primer vocal que aparece. Hay 435 personas que empiezan con \emph{a} %TODO: pensar bien qué ejemplo quiero poner. Debe poder hacerse por el principio de suma(método largo) y por el de complemento.
 \end{ejm}
 \begin{proof}[Solución]
-	Se le deja al lector. % TODO
 \end{proof}
+
+% TODO: ¿Leyes de De Morgan?
 
 \subsubsection{Principio de multiplicación}
 Consideremos una colección de $n$ cajas, en la $i$-ésima caja, hay $k_i$ canicas; y nos preguntamos: ¿de cuántas formas puedo tomar una canica de cada caja?
 El \textbf{principio multiplicativo} soluciona este tipo de problemas diciéndonos que tiene exactamente $\prod_{i<n}k_i$ formas de hacerlo.
 
+%TODO: ¿Usar sólo una clase objectos S's? ¿O dejarlo con A's y S's?
 Menos informalmente, supongamos que tenemos una colección de espacios muestrales $\left\lbrace S_i \right\rbrace_{i<n}$ y se elige un evento $A_i \subseteq S_i$ de cada uno de ellos. 
 Si $S$ es el espacio muestral que consiste en \emph{ejecutar} %TODO No me gusta (instanciar? interpretar?)
 cada uno, y en orden, los \emph{experimentos} de cada espacio $S_i$; y $A \subseteq S$ denota los puntos de $S$ de tal forma que: en la primer etapa del experimento de $S$ (o sea en la etapa de $S_0$) ocurre $A_0$; en la segunda etapa ocurre $A_1$, \ldots, en la $i$-esima etapa ocurre $A_i$. Entonces este evento $A$ ocurre exactamente $k_0 \cdotp k_1 \cdots k_{n-1}$, donde $k_i= \card{A_i}$.
 Este principio se puede abreviar así:
 \begin{equation}\label{eq_PrincipioMultiplicativo}
-	\card{S} = \card{\prod_{i<n} S_i} = \prod_{i<n}k_i = k_0 \cdotp k_1 \cdots k_{n-1}
+	\card{A} = \card{\prod_{i<n} A_i} = \prod_{i<n}k_i = k_0 \cdotp k_1 \cdots k_{n-1}
 \end{equation}
 
 \begin{ejm}\label{ejm_numerosMenorQue}
@@ -154,7 +156,7 @@ A este número lo llamamos $\comb{n}{m}$ (combinaciones de $n$ en $m$) donde $n$
 Se puede calcular con la siguiente fórmula: \[\comb{n}{m} = \frac{\perm{n}{m}}{m!} = \frac{n!}{m!(n-m)!} \]
 
 %TODO: Algún ejemplo aquí.
-\subsubsection{Problemas}
+\subsection{Problemas}
 
 \begin{enumerate}
 \item Expanda y calcule las siguientes expresiones:
@@ -233,6 +235,36 @@ Esta noción sí nos permite calcular de que un número natural sea par:
 primero notamos que hay exactamente $n$ números pares menores que $2n$. Así que $f_{2n}= \frac{\card{A|_{2n}}}{2n}=\frac{n}{2n}=\frac{1}{2}$.
 % Este límite no está bien justificado, pero supongo que está bien
 Y luego $p(e) = \lim\limits_{n \to \infty} f_n = \lim\limits_{n \to \infty} f_{2n}= \lim\limits_{n \to \infty}\frac{1}{2} = \frac{1}{2}$.
+
+\subsection{Teoría de conjuntos}
+% TODO
+\subsection{Problemas}
+
+\begin{enumerate}
+\item Considere los conjuntos: $A= \left\lbrace rojo, verde, azul \right\rbrace$ y $ B = \left\lbrace amarillo, rojo, negro \right\rbrace$. Calcule $A \cap B$, $A \cup B$, $A \setminus B$, $A \triangle B$
+
+\item Si $I = [0, \infty]$ es el conjunto de todos los números no negativos, $J=[-1, 1]$ es el conjunto de los números entre -1 y 1, y $\mathbb{R}$ es la recta real, el conjunto de todos los números. Para cada uno de los siguientes conjuntos, haga un bosquejo de un dibujo que lo represente en la recta real.
+\begin{multicols}{4}\begin{itemize}
+	\item $I \cap J$ \item $I \cup J$ \item $J \setminus I$ \item $I \setminus J$ \item $I \triangle J$ \item $\mathbb{R} \setminus I$ \item $J \setminus \mathbb{R}$
+\end{itemize}\end{multicols}
+
+\item Para cada una de las siguientes igualdades, utilizando un diagrama de Venn, muestre si son ciertas o falsas
+\begin{multicols}{2}\begin{itemize}
+	\item $A \cap B = B \cap A$ 
+	\item $A \cup B = B \cup A$ 
+	\item $A \setminus B = B \setminus A$
+	\item $A \triangle B = B \triangle A$
+	\item $A \triangle B = (A \setminus B) \cup (B \setminus A)$
+\end{itemize}\end{multicols}
+
+\item Sea $M=\left\lbrace \text{águila, sello} \right\rbrace$ las posibles resoluciones de lanzar una moneda al aire, y $D = \left\lbrace 1,2,3,4,5,6 \right\rbrace$ la de lanzar un dado. Considere el espacio muestral $X = M \times D$ y sea $e$ el evento de $X$ que consta de los puntos muestrales de $X$ en las que $M$ es sello; y $f$ es el evento que ocurre cuando el dado $D$ cae en 2.
+Calcule $e \cup f$, $e \cap f$ y $e \triangle f$. ¿Son $e$ y $f$ ajenos?
+\end{enumerate}
+
+\section{Independencia probabilística}
+
+% iniciar en concreto y hacer el camino al abstracto
+%Imaginemos que tenemos dos eventos: $e$ y $f$, ¿cómo interactúan entre sí?
 
 
 \end{document}
