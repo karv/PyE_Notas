@@ -153,7 +153,21 @@ Podemos reescribir la ecuación \ref{eq_defPermutacion} para que nos quede
 
 ¿Y ahora que tal si no nos importa en qué orden seleccionamos un subconjunto? por ejemplo, para seleccionar un subgrupo de personas de uno dado; % TODO: ¿poner algún otro ejemplo genérico?
 A este número lo llamamos $\comb{n}{m}$ (combinaciones de $n$ en $m$) donde $n$ es el tamaño del conjunto inicial, y $m$ es el tamaño de los subconjuntos que se quieren contar.
-Se puede calcular con la siguiente fórmula: \[\comb{n}{m} = \frac{\perm{n}{m}}{m!} = \frac{n!}{m!(n-m)!} \]
+
+Supongamos que tenemos un conjunto de 4 personas ($P_1, P_2, P_3, P_4$ para ponerles nombre.) Si queremos seleccionar a dos de ellas eligiéndolas de una por una; hay $\perm{4}{2}$ formas de hacer esto, pero ¿qué tal si no nos importa el orden en el que seleccionamos a estos dos elegidos? o equivalentemente ¿qué tal si los seleccionamos \emph{al mismo tiempo}?
+Debería ser un número menor que $\perm{4}{2}$; digamos que es $x$.
+¿Qué sabemos entonces de $x$? ¿Qué relación tiene con $\perm{4}{2}$? 
+Pues bastante. Digamos que ya calculamos a $x$ y queremos recuperar el valor de $\perm{4}{2}$ a partir de ella.
+Pensémoslo así: supongamos que la pareja elegida es $\left\lbrace P_2, P_4 \right\rbrace$ así que si nos importara el orden, podríamos hacer dos parejas ordenadas con $P_2$ y $P_4$, a saber, $(P_2, P_4)$ y $(P_4, P_2)$.
+Podemos realizar este mismo argumento reemplazando a la pareja $P_2$ y $P_4$ con cualquier otra pareja y deducir que para cada par no ordenado de personas, hay dos pares ordenados de las mismas personas.
+
+% TODO: Por aquí estaría bien un applet para jugar con la idea (en el formato interactivo)
+De esta forma obtenemos la ecuación $2 x = \perm{4}{2}$ y así $x = \dfrac{\perm{4}{2}}{2}$.
+
+Hasta ahora bien, pensemos ahora qué cambiaría en nuestro ejemplo si en lugar de querer tomar parejas necesitaríamos contar ternas. 
+Ahora $x$ será el número de formas de seleccionar simultáneamente a tres de las cuatro personas, y nos preguntamos por la relación de $x$ con $\perm{4}{3}$.
+Como le hicimos antes, Si por ejemplo seleccionamos a $P_1, P_3$ y $P_4$, entonces esta selección no ordenada nos genera exactamente $\perm{3}{3} = 3!$ formas de ordenarlas (lo que en el caso anterior era el $2=2!$); y así $3!\cdot x = \perm{4}{3}$ y $x = \dfrac{\perm{4}{3}}{3!}$.
+Siguiendo el patrón, podemos inducir la fórmula: \[\comb{n}{m} = \frac{\perm{n}{m}}{m!} = \frac{n!}{m!(n-m)!} \]
 
 %TODO: Algún ejemplo aquí.
 \subsection{Problemas}
