@@ -26,6 +26,7 @@
 \newcommand{\card}[1]{\left|#1 \right|}
 \newcommand{\comb}[2]{ {}_{#1}C_{#2}}
 \newcommand{\perm}[2]{ {}_{#1}P_{#2}}
+\newcommand{\comillas}[1]{``#1"}
 
 
 \title {Notas para el curso de probabilidad y estadística}
@@ -277,8 +278,36 @@ Calcule $e \cup f$, $e \cap f$ y $e \triangle f$. ¿Son $e$ y $f$ ajenos?
 
 \section{Independencia probabilística}
 
-% iniciar en concreto y hacer el camino al abstracto
-%Imaginemos que tenemos dos eventos: $e$ y $f$, ¿cómo interactúan entre sí?
+Hasta el momento, nuestro sistema de probabilidad ha sido estático, pero en la vida real no es así: tenemos que estar actualizando nuestras probabilidades conforme vamos aprendiendo del mundo. Esto nos lleva a un fenómeno interesante en el análisis de probabilidades conocido como \textit{probabilidad condicional}.
 
+Pongamos un ejemplo; supongamos que hoy es un día de verano, y como es típico e nuestra región la lluvia es muy escasa por lo que decidimos que la probabilidad de que llueva es muy baja, así que decidimos salir sin paraguas. Una vez salimos y vemos el cielo gris nublado en el cielo decidimos que la probabilidad de que llueva \textit{es ahora} más alta y así que decidimos ir por nuestro paraguas.
+No es que nos hayamos equivocado en nuestra primer decisión de no llevar paraguas, era correcta, pero obtener más información nos obligó a reinterpretar al mundo y volver a tomar una decisión conforme a lo que vimos.
+
+Este tipo de fenómenos es el que modela la probabilidad condicional.
+
+\begin{defi} \label{def_ProbCondicional}
+	Sean $e,f \subseteq S$ dos eventos de $S$ tal que $P(f) > 0$. Definimos la probabilidad de $e$ dado que $f$
+	\[P(e | f) = \dfrac{P(e \cap f)}{P(f)} \]
+\end{defi}
+
+Podemos pensarlo con la definición clásica, y dinámicamente (usando un $^*$ a los objetos evaluados despues de saber que ocurre $f$) así una vez sabemos que $f$, debemos suponer que no puede ser que no pase $f$, así que $P^*(f^\prime) = 0 $ y por lo tanto $P^*(e \setminus f) = 0$ ya que es un evento \emph{menor} que $f^\prime$.
+Así que \[P^* (e) = P^* (e \cap f) + P^*(e \setminus f) =P^* (e \cap f) = \dfrac{\card{e \cap f}}{\card{S}^*}. \]Pero luego como sabemos que $f$, no puede haber un evento sin $f$ en nuestro espacio, así que $\card{f}^* = \card{S}^*$, lo que nos dice que $P^*(e)=\frac{\card{e \cap f}}{\card{f}^*}$ y dividiendo todo entre $\card{S}$ tenemos que $P^* (e) = \frac{P(e \cap f)}{P(f)}$
+Pero dado que $P^* (e)$ denota justamente la probabilidad de $e$ suponiendo que ocurre $f$ llegamos a la definición \ref{def_ProbCondicional}.
+
+Ahora, vamos a decir que dos eventos son independientes si la resolución de uno de ellos no influye en la probabilidad del otro: $P(e|f)=P(e)$ (o equivalentemente, $P(f|e) = P(f)$). Y por convención, todo evento $e$ improbable ($P(e) = 0$) es independiente a cualquier otro evento.
+
+Observamos que si $e$ y $f$ son eventos independientes y $P(f) > 0$ entonces
+\[P(e) = P(e|f) = \dfrac{P(e \cap f)}{P(f)}\]
+y luego $P(e)P(f) = P(e \cap f)$.
+Hay que notar también que esta última igualdad se cumple cuando $P(f)=0$.
+Podemos resumir esta discusión en la siguiente definición.
+
+\begin{defi}
+	Sean $e, f \subseteq S$ dos eventos de un espacio muestral, decimos que tales eventos son independientes si $P(e \cap f) = P(e) P(f)$.
+\end{defi}
+
+\begin{thebibliography}{}
+\bibitem{MMW} \textsc{Myers, Raymond}, \textsc{Myers, Shanon} y \textsc{Walpole, Roland}, \textit{Probability and Statistics for Engineers and Scientists}, Novena edición. Prentice Hall
+\end{thebibliography}
 
 \end{document}
